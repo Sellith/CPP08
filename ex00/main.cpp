@@ -1,0 +1,67 @@
+/* *************************************************************************************************************** */
+/*   main.cpp                                                                                                      */
+/*   By: lvan_bre                                                                   .,                             */
+/*                                                                                 okxl                            */
+/*                                                                                xkddo                            */
+/*                                                                               kkxddo                            */
+/*                                                                              lxxddol                            */
+/*                                                                              xxdolol.                           */
+/*                                                                             :kxdddddl                 .ox,      */
+/*                                                                       ..,cdkOOkkkxdddd'      ;o.     ckkd,      */
+/*                                                               .,:coxOOOkkkkkkkxxxxxddddo:...lxdl.   ckkxd.      */
+/*                                                           ;oxOOOOkkxxkxxxxxxxxxxdddddodddxxxkkxxxdlckkxdd.      */
+/*                                                        ,oOOOkkkkxxxdddxdddddddddddddoooooodooddddooooddooc      */
+/*                                                      ;kkkkkxxxxxddoooooooooooooooooooooooooollooooooololll      */
+/*                                                     oxodddddoooooolllllllolooooollloooollllolllllloooolccl;     */
+/*                                                    'x:::cclccllllccccccccccclllclllllllllllllllll     .;;cl;    */
+/*                                                    d;c::cc:cc:::;::c:c:cccccclccc:cccclllllll,         .:cl.    */
+/*                                                      c;,;:;;::::;;::::c..,cccllcc:c;;:lloodk.                   */
+/*                                                        'ooooooooodddxxkkkOOOkOOOOOOc:cclllloo'                  */
+/*                                                           .XXXXXXXKKXXXXXXXXXXXXXXXkcccclcccllo                 */
+/*                                                                 ,KKKKKXXXXXXXXXXXXK0.  .:ccllclll;.             */
+/*                                                                                           .ccccccllc,.          */
+/*                                                                                                 :::cl:          */
+/*                                                                                                                 */
+/* *************************************************************************************************************** */
+
+#include "include.hpp"
+#include <algorithm>
+
+template < typename T >
+static void	printOneValue ( T value )
+{std::cout << value << "\n";}
+
+int main ( void )
+{
+
+	std::cout << "Testing error handling (empty container)\n";
+	try {
+		std::set<int> emptySet;
+		easyfind (emptySet, 3);
+	}
+	catch (std::runtime_error &e) {
+		std::cout << "Exception : " << e.what() << "\n";
+	}
+	std::cout << "\n";
+	std::srand(time(NULL));
+
+	std::set<int> ar;
+	std::cout << ">> Inserting 10 random values between 0 and 10 \n\n";
+	for (int i = 0; i < 10; i++) {
+		ar.insert(rand() % 10);
+	}
+
+	std::cout << "Printing all inserted values : \n\n";
+	std::for_each(ar.begin(), ar.end(), printOneValue<int>);
+
+	std::cout << "\nNow testing wich values is in the set :\n\n";
+	for (int i = 0; i < 10; i++) {
+		try {
+			std::cout << i << " : " << *easyfind( ar, i );
+			std::cout << ", value found." << std::endl;	
+		}
+		catch (std::runtime_error &e) {
+			std::cout << e.what() << std::endl;
+			}
+	}
+}
