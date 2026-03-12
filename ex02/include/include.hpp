@@ -1,5 +1,5 @@
 /* *************************************************************************************************************** */
-/*   main.cpp                                                                                                      */
+/*   include.hpp                                                                                                   */
 /*   By: lvan-bre                                                                   .,                             */
 /*                                                                                 okxl                            */
 /*                                                                                xkddo                            */
@@ -24,53 +24,19 @@
 /*                                                                                                                 */
 /* *************************************************************************************************************** */
 
-#include "include.hpp"
+#ifndef INCLUDE_HPP
+# define INCLUDE_HPP
 
-int main ( void )
-{
-	using	std::cout;
-	
-	std::srand(time(NULL));
-	
-	span a(5);
-	try {
-		for (int i = 0; i < 5; i++)
-			a.addNumber(rand() % 20);
-		cout << _WHITE << a;
-		cout << _WHITE << "The min is : " << _CYAN << *std::min_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
-		cout << _WHITE << "The max is : " << _CYAN << *std::max_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
-		cout << _WHITE << "The biggest span is : " << _CYAN << a.longestSpan() << "\n"; 
-		cout << _WHITE << "The shortest span is : " << _CYAN << a.shortestSpan() << "\n";
+# include "MutantStack.hpp"
+# include <ctime>
+# include <cstdlib>
 
-		/* Error handling */
+# define _RED		"\e[1;91m"
+# define _GREEN		"\e[1;92m"
+# define _YELLOW	"\e[1;93m"
+# define _PURPLE	"\e[1;95m"
+# define _CYAN		"\e[1;96m"
+# define _WHITE		"\e[1;97m"
+# define _RESET		"\e[0m"
 
-		cout << _WHITE << "Adding a 6th number : ";
-		a.addNumber(rand() % 20);
-	}
-	catch (std::runtime_error & e) {
-		cout << _RED << "Exception : " << e.what() << std::endl;
-	}
-
-	span b(1);
-	try {
-		cout << _WHITE << "Longest span of 1 value vector : " <<b.longestSpan() << "\n";
-	}
-	catch (std::runtime_error & e) {
-		cout << _RED << "Exception : " << e.what() << std::endl;
-	}
-
-	cout << "\n";
-
-	int	big_size = 10000;
-	span chonky(big_size);
-	try {
-		for (int i = 0; i < big_size; i++) {
-			chonky.addNumber(rand());
-		}
-		cout << _WHITE << "The biggest span of the big chonky vector is : " << _CYAN << chonky.longestSpan() << "\n";
-		cout << _WHITE << "The smallest span of the big chonky vector is : " << _CYAN << chonky.shortestSpan() << "\n";
-	}
-	catch (std::exception & e) {
-		cout << _RED << "Exception : " << e.what() << _RESET << std::endl;
-	}
-}
+#endif

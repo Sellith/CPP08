@@ -40,6 +40,7 @@ TARGETDEBUG	:=	Debug_ScalarConvert
 NAME		:=	$(BIN_DIR)/$(TARGET)
 NAMEDEBUG	:=	$(BIN_DIR)/$(TARGETDEBUG)
 
+INC_PATH	:=	include
 
 CLR_RESET	:=	\033[0m
 CLR_RED		:=	\033[1;91m
@@ -89,20 +90,20 @@ fcleanall:	fclean fcleanbug
 
 $(NAME):	$(OBJS)
 	@mkdir -p $(BIN_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ -I$(INC_PATH)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tDone Building:\t$(CLR_PPL)\"%s\"$(CLR_GRN) in $(CLR_PPL)\"%s/\"$(CLR_GRN)!$(CLR_RESET)\n" $(TARGET) $(BIN_DIR)
 
 $(NAMEDEBUG):	$(OBJS_DEBUG)
 	@mkdir -p $(BIN_DIR)
-	@$(CC) $(CFLAGS) $(OBJS_DEBUG) -o $@ -DDEBUG=true
+	@$(CC) $(CFLAGS) $(OBJS_DEBUG) -o $@ -DDEBUG=true -I$(INC_PATH)
 	@printf "$(ERS_STR)$(CLR_BLUE)\tDone Building:\t$(CLR_PPL)\"%s\"$(CLR_GRN) in $(CLR_PPL)\"%s/\"$(CLR_GRN)!$(CLR_RESET)\n" $(TARGETDEBUG) $(BIN_DIR)
 
 $(D_BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(D_BUILD_DIR)
-	@$(CC) $(CFLAGS) $(CPPFLAG) -c $< -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAG) -c $< -o $@ -I$(INC_PATH)
 	@printf "$(CLR_CYAN)\tCompiling: $(CLR_PPL)\"%s\"$(CLR_CYAN)...\n" $<
 
 $(DEBUG_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(DEBUG_DIR)
-	@$(CC) $(CFLAGS) $(CPPFLAG) -c $< -o $@ -DDEBUG=true
+	@$(CC) $(CFLAGS) $(CPPFLAG) -c $< -o $@ -DDEBUG=true -I$(INC_PATH)
 	@printf "$(CLR_CYAN)\tCompiling: $(CLR_PPL)\"%s\"$(CLR_CYAN)...\n" $<

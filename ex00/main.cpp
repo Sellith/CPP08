@@ -33,35 +33,36 @@ static void	printOneValue ( T value )
 
 int main ( void )
 {
+	using	std::cout;
 
-	std::cout << "Testing error handling (empty container)\n";
+	cout << "Testing error handling (empty container)\n";
 	try {
 		std::set<int> emptySet;
 		easyfind (emptySet, 3);
 	}
 	catch (std::runtime_error &e) {
-		std::cout << "Exception : " << e.what() << "\n";
+		cout << "Exception : " << e.what() << "\n";
 	}
-	std::cout << "\n";
+	cout << "\n";
 	std::srand(time(NULL));
 
 	std::set<int> ar;
-	std::cout << ">> Inserting 10 random values between 0 and 10 \n\n";
+	cout << ">> Inserting 10 random values between 0 and 10 \n\n";
 	for (int i = 0; i < 10; i++) {
 		ar.insert(rand() % 10);
 	}
 
-	std::cout << "Printing all inserted values : \n\n";
+	cout << "Printing all inserted values : \n\n";
 	std::for_each(ar.begin(), ar.end(), printOneValue<int>);
 
-	std::cout << "\nNow testing wich values is in the set :\n\n";
+	cout << "\nNow testing wich values is in the set :\n\n";
 	for (int i = 0; i < 10; i++) {
 		try {
-			std::cout << i << " : " << *easyfind( ar, i );
-			std::cout << ", value found." << std::endl;	
+			cout << i << " : " << *easyfind( ar, i );
+			cout << ", value found." << std::endl;	
 		}
 		catch (std::runtime_error &e) {
-			std::cout << e.what() << std::endl;
+			cout << e.what() << std::endl;
 			}
 	}
 }

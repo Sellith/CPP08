@@ -1,5 +1,5 @@
 /* *************************************************************************************************************** */
-/*   main.cpp                                                                                                      */
+/*   MutantStack.hpp                                                                                               */
 /*   By: lvan-bre                                                                   .,                             */
 /*                                                                                 okxl                            */
 /*                                                                                xkddo                            */
@@ -24,53 +24,47 @@
 /*                                                                                                                 */
 /* *************************************************************************************************************** */
 
-#include "include.hpp"
+#ifndef MUTANTSTACK_HPP
+# define MUTANTSTACK_HPP
 
-int main ( void )
+# include <stack>
+# include <iostream>
+# include <vector>
+
+template < typename T >
+class MutantStack : public std::stack<T> 
 {
-	using	std::cout;
+
+public:
+
+	MutantStack ( void ) : std::stack<T>() {}
+	MutantStack ( MutantStack const & other ) : std::stack<T>(other) {}
+	~MutantStack ( void ) {}
 	
-	std::srand(time(NULL));
+	MutantStack & operator= ( MutantStack const & other ) {
+		if ( this != &other )
+			std::stack<T>::operator=(other);
+		return ( *this );
+	}
+
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	typedef typename std::stack<T>::container_type::const_iterator const_iterator;
+	typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
+	typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
+
+	iterator begin ( void ) { return (std::stack<T>::c.begin()); }
+	iterator end ( void ) { return (std::stack<T>::c.end()); }
 	
-	span a(5);
-	try {
-		for (int i = 0; i < 5; i++)
-			a.addNumber(rand() % 20);
-		cout << _WHITE << a;
-		cout << _WHITE << "The min is : " << _CYAN << *std::min_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
-		cout << _WHITE << "The max is : " << _CYAN << *std::max_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
-		cout << _WHITE << "The biggest span is : " << _CYAN << a.longestSpan() << "\n"; 
-		cout << _WHITE << "The shortest span is : " << _CYAN << a.shortestSpan() << "\n";
+	const_iterator begin ( void ) const { return (std::stack<T>::c.begin()); }
+	const_iterator end ( void ) const { return (std::stack<T>::c.end()); }
 
-		/* Error handling */
+	reverse_iterator rbegin ( void ) { return (std::stack<T>::c.rbegin()); }
+	reverse_iterator rend ( void ) { return (std::stack<T>::c.rend()); }
 
-		cout << _WHITE << "Adding a 6th number : ";
-		a.addNumber(rand() % 20);
-	}
-	catch (std::runtime_error & e) {
-		cout << _RED << "Exception : " << e.what() << std::endl;
-	}
+	const_reverse_iterator rbegin ( void ) const { return (std::stack<T>::c.rbegin()); }
+	const_reverse_iterator rend ( void ) const { return (std::stack<T>::c.rend()); }
+};
 
-	span b(1);
-	try {
-		cout << _WHITE << "Longest span of 1 value vector : " <<b.longestSpan() << "\n";
-	}
-	catch (std::runtime_error & e) {
-		cout << _RED << "Exception : " << e.what() << std::endl;
-	}
+// # include "MutantStack.tpp"
 
-	cout << "\n";
-
-	int	big_size = 10000;
-	span chonky(big_size);
-	try {
-		for (int i = 0; i < big_size; i++) {
-			chonky.addNumber(rand());
-		}
-		cout << _WHITE << "The biggest span of the big chonky vector is : " << _CYAN << chonky.longestSpan() << "\n";
-		cout << _WHITE << "The smallest span of the big chonky vector is : " << _CYAN << chonky.shortestSpan() << "\n";
-	}
-	catch (std::exception & e) {
-		cout << _RED << "Exception : " << e.what() << _RESET << std::endl;
-	}
-}
+#endif
