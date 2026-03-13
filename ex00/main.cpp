@@ -35,34 +35,34 @@ int main ( void )
 {
 	using	std::cout;
 
-	cout << "Testing error handling (empty container)\n";
+	cout << _YELLOW << "Testing error handling (empty container)\n";
 	try {
 		std::set<int> emptySet;
 		easyfind (emptySet, 3);
 	}
 	catch (std::runtime_error &e) {
-		cout << "Exception : " << e.what() << "\n";
+		cout << _RED << "Exception : " << e.what() << "\n";
 	}
 	cout << "\n";
 	std::srand(time(NULL));
 
 	std::set<int> ar;
-	cout << ">> Inserting 10 random values between 0 and 10 \n\n";
+	cout << _WHITE << ">> Inserting 10 random values between 0 and 10 \n\n";
 	for (int i = 0; i < 10; i++) {
 		ar.insert(rand() % 10);
 	}
 
-	cout << "Printing all inserted values : \n\n";
+	cout << "Printing all inserted values : \n\n" << _CYAN;
 	std::for_each(ar.begin(), ar.end(), printOneValue<int>);
 
-	cout << "\nNow testing wich values is in the set :\n\n";
+	cout << _WHITE << "\nNow testing wich values is in the set :\n\n";
 	for (int i = 0; i < 10; i++) {
 		try {
-			cout << i << " : " << *easyfind( ar, i );
-			cout << ", value found." << std::endl;	
+			cout << i << " : " << _CYAN << *easyfind( ar, i );
+			cout << _GREEN << ", value found." << _WHITE << std::endl;	
 		}
 		catch (std::runtime_error &e) {
-			cout << e.what() << std::endl;
+			cout << _RED << e.what() << _WHITE << std::endl;
 			}
 	}
 }

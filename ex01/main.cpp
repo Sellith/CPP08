@@ -36,13 +36,15 @@ int main ( void )
 	try {
 		for (int i = 0; i < 5; i++)
 			a.addNumber(rand() % 20);
-		cout << _WHITE << a;
-		cout << _WHITE << "The min is : " << _CYAN << *std::min_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
-		cout << _WHITE << "The max is : " << _CYAN << *std::max_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
+		cout << a;
+		cout << _WHITE << "The smallest number is : " << _CYAN << *std::min_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
+		cout << _WHITE << "The biggest number is : " << _CYAN << *std::max_element(a.getBeginIterator(), a.getEndIterator()) << "\n";
 		cout << _WHITE << "The biggest span is : " << _CYAN << a.longestSpan() << "\n"; 
-		cout << _WHITE << "The shortest span is : " << _CYAN << a.shortestSpan() << "\n";
+		cout << _WHITE << "The shortest span is : " << _CYAN << a.shortestSpan() << "\n\n";
 
 		/* Error handling */
+
+		cout << _WHITE << "Now testing error handling :\n\n";
 
 		cout << _WHITE << "Adding a 6th number : ";
 		a.addNumber(rand() % 20);
@@ -61,12 +63,18 @@ int main ( void )
 
 	cout << "\n";
 
+	cout << _WHITE << "Testing big_size spans (it's over 9000 !!!) :\n\n";
+
 	int	big_size = 10000;
 	span chonky(big_size);
 	try {
 		for (int i = 0; i < big_size; i++) {
 			chonky.addNumber(rand());
 		}
+		cout << _WHITE << "The smallest number of the big chonky vector is : " 
+			<< _CYAN << *std::min_element(chonky.getBeginIterator(), chonky.getEndIterator()) << "\n";
+		cout << _WHITE << "The biggest number of the big chonky vector is : " 
+			<< _CYAN << *std::max_element(chonky.getBeginIterator(), chonky.getEndIterator()) << "\n";
 		cout << _WHITE << "The biggest span of the big chonky vector is : " << _CYAN << chonky.longestSpan() << "\n";
 		cout << _WHITE << "The smallest span of the big chonky vector is : " << _CYAN << chonky.shortestSpan() << "\n";
 	}

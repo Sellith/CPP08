@@ -78,25 +78,26 @@ int span::shortestSpan ( void ) const
 {
 	if (size_ < 2)
 		throw std::runtime_error("Not enough elements");
+	
 	std::vector<int>			sorted = array_;
-	std::sort(sorted.begin(), sorted.end());
-	std::vector<int>::iterator	itl = sorted.begin();
-	std::vector<int>::iterator	itr = itl + 1;
+
+	std::sort(sorted.begin(), sorted.end());	
+
 	int							res = MAX_VALUE;
 	int							tmp = 0;
-	while (itr != sorted.end()) {
-		tmp = *itr - *itl;
-		if (tmp < res)
+
+	for ( std::vector<int>::iterator itl = sorted.begin(); itl + 1 != sorted.end(); itl++ ) {
+		tmp = *(itl + 1) - *itl;
+		if ( tmp < res )
 			res = tmp;
-		itl++;
-		itr++;
 	}
+
 	return (res);
 }
 
 std::ostream &	operator<< ( std::ostream & o, span const & src )
 {
-	o << "Size is : " << _CYAN << src.get_size() << "\n";
+	o << _WHITE << "Size is : " << _CYAN << src.get_size() << "\n";
 	o << _WHITE << "Elements are : " << _CYAN;
 	for (int i = 0; i < src.get_size(); i++)
 		o << src.get_n_element(i) << " ";
