@@ -57,6 +57,16 @@ void	span::addNumber ( int const value)
 	array_.push_back(value);
 }
 
+void	span::addArray ( std::vector<int>::iterator bg, std::vector<int>::iterator end )
+{
+	while ( bg != end ) {
+		if ( array_.size() == size_ )
+			throw std::runtime_error("Couldn't add another number to vector");
+		array_.push_back(*bg);
+		bg++;
+	}
+}
+
 int span::get_size ( void ) const {return (size_);}
 
 int	span::get_n_element ( int n ) const {return (array_.at(n));}

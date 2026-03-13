@@ -51,6 +51,8 @@ public:
 	std::vector<int>::iterator	getEndIterator ( void );
 
 	void						addNumber ( int const );
+	void						addArray ( std::vector<int>::iterator, 
+		std::vector<int>::iterator );
 	int							shortestSpan ( void ) const;
 	int							longestSpan ( void ) const;
 

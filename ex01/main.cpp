@@ -67,10 +67,13 @@ int main ( void )
 
 	int	big_size = 10000;
 	span chonky(big_size);
+	std::vector<int> buf;
+
 	try {
 		for (int i = 0; i < big_size; i++) {
-			chonky.addNumber(rand());
+			buf.push_back(rand());
 		}
+		chonky.addArray(buf.begin(), buf.end());
 		cout << _WHITE << "The smallest number of the big chonky vector is : " 
 			<< _CYAN << *std::min_element(chonky.getBeginIterator(), chonky.getEndIterator()) << "\n";
 		cout << _WHITE << "The biggest number of the big chonky vector is : " 
