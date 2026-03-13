@@ -29,7 +29,7 @@
 
 template < typename T >
 static void	printOneValue ( T value )
-{std::cout << value << "\n";}
+{std::cout << value << " ";}
 
 int main ( void )
 {
@@ -55,7 +55,7 @@ int main ( void )
 	cout << "Printing all inserted values : \n\n" << _CYAN;
 	std::for_each(ar.begin(), ar.end(), printOneValue<int>);
 
-	cout << _WHITE << "\nNow testing wich values is in the set :\n\n";
+	cout << _WHITE << "\n\nNow testing wich values is in the set :\n\n";
 	for (int i = 0; i < 10; i++) {
 		try {
 			cout << i << " : " << _CYAN << *easyfind( ar, i );
