@@ -63,7 +63,7 @@ int main ( void )
 
 	cout << "\n";
 
-	cout << _WHITE << "Testing big_size spans (it's over 9000 !!!) :\n\n";
+	cout << _WHITE << "Testing big_size spans by adding iitertor ranges :\n\n";
 
 	int	big_size = 10000;
 	span chonky(big_size);
